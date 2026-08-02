@@ -6,85 +6,91 @@
 <title>Animaux de la ferme</title>
 
 <style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f5f2e9;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+* {
+  box-sizing: border-box;
 }
 
-div{
-    text-align:center;
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f4efe5;
+  color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
-#animal{
-    font-size:70px;
+main {
+  width: min(100%, 520px);
+  padding: 38px 26px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
 }
 
-h1{
-    margin:10px 0;
+#icone {
+  margin-bottom: 16px;
+  font-size: 76px;
+  line-height: 1;
 }
 
-audio{
-    width:320px;
+h1 {
+  margin: 0 0 14px;
+  font-size: 30px;
+}
+
+p {
+  margin: 0 0 28px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+audio {
+  width: 100%;
 }
 </style>
 </head>
 
 <body>
 
-<div>
-<div id="animal">🐄</div>
-<h1 id="titre">La vache</h1>
+<main>
+  <div id="icone">🐄</div>
 
-<audio id="audio" controls>
-</audio>
+  <h1 id="titre">Écoutez la vache</h1>
 
-</div>
+  <p>
+    Appuyez sur le bouton de lecture pour entendre son cri.
+  </p>
+
+  <audio id="audio" controls preload="metadata"></audio>
+</main>
 
 <script>
-
 const animaux = {
-
-vache:["🐄","La vache","Vache-CalSury27.mp3"],
-
-cheval:["🐎","Le cheval","Cheval-CalSury27.mp3"],
-
-cochon:["🐖","Le cochon","Cochon-CalSury27.mp3"],
-
-mouton:["🐑","Le mouton","Mouton-CalSury27.mp3"],
-
-chevre:["🐐","La chèvre","Chevre-CalSury27.mp3"],
-
-coq:["🐓","Le coq","Coq-CalSury27.mp3"],
-
-poussins:["🐥","Les poussins","Poussins-CalSury27.mp3"],
-
-canard:["🦆","Le canard","Canard-CalSury27.mp3"],
-
-ane:["🫏","L'âne","Ane-CalSury27.mp3"],
-
-oie:["🪿","L'oie","Oie-CalSury27.mp3"],
-
-dindon:["🦃","Le dindon","Dindon-CalSury27.mp3"],
-
-chien:["🐕","Le chien","Chien-CalSury27.mp3"]
-
+  vache: ["🐄", "Écoutez la vache", "Vache-CalSury27.mp3"],
+  cheval: ["🐎", "Écoutez le cheval", "Cheval-CalSury27.mp3"],
+  cochon: ["🐖", "Écoutez le cochon", "Cochon-CalSury27.mp3"],
+  mouton: ["🐑", "Écoutez le mouton", "Mouton-CalSury27.mp3"],
+  chevre: ["🐐", "Écoutez la chèvre", "Chevre-CalSury27.mp3"],
+  coq: ["🐓", "Écoutez le coq", "Coq-CalSury27.mp3"],
+  poussins: ["🐥", "Écoutez les poussins", "Poussins-CalSury27.mp3"],
+  canard: ["🦆", "Écoutez le canard", "Canard-CalSury27.mp3"],
+  ane: ["🫏", "Écoutez l’âne", "Ane-CalSury27.mp3"],
+  oie: ["🪿", "Écoutez l’oie", "Oie-CalSury27.mp3"],
+  dindon: ["🦃", "Écoutez le dindon", "Dindon-CalSury27.mp3"],
+  chien: ["🐕", "Écoutez le chien", "Chien-CalSury27.mp3"]
 };
 
-const url=new URL(window.location);
+const params = new URLSearchParams(window.location.search);
+const nom = (params.get("animal") || "vache").toLowerCase();
+const animal = animaux[nom] || animaux.vache;
 
-const nom=url.searchParams.get("animal") || "vache";
-
-const a=animaux[nom];
-
-document.getElementById("animal").textContent=a[0];
-document.getElementById("titre").textContent=a[1];
-document.getElementById("audio").src=a[2];
-
+document.getElementById("icone").textContent = animal[0];
+document.getElementById("titre").textContent = animal[1];
+document.getElementById("audio").src = animal[2];
 </script>
 
 </body>
