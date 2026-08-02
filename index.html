@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Les animaux de la ferme</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #f4efe5;
+      color: #222;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+
+    main {
+      width: min(100%, 520px);
+      padding: 38px 26px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+    }
+
+    #icone {
+      margin-bottom: 16px;
+      font-size: 76px;
+      line-height: 1;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: 30px;
+    }
+
+    p {
+      margin: 0 0 28px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    #erreur {
+      display: none;
+      color: #a00000;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div id="icone">🐄</div>
+
+    <h1 id="titre">Écoutez la vache</h1>
+
+    <p id="instruction">
+      Appuyez sur le bouton de lecture pour entendre son cri.
+    </p>
+
+    <audio id="lecteur" controls preload="metadata">
+      Votre navigateur ne permet pas de lire ce fichier audio.
+    </audio>
+
+    <p id="erreur">
+      Animal inconnu ou fichier audio indisponible.
+    </p>
+  </main>
+
+  <script>
+    const animaux = {
+      vache: {
+        nom: "la vache",
+        icone: "🐄",
+        fichier: "Vache-CalSury27.mp3"
+      },
+
+      cheval: {
+        nom: "le cheval",
+        icone: "🐎",
+        fichier: "Cheval-CalSury27.mp3"
+      },
+
+      cochon: {
+        nom: "le cochon",
+        icone: "🐖",
+        fichier: "Cochon-CalSury27.mp3"
+      },
+
+      mouton: {
+        nom: "le mouton",
+        icone: "🐑",
+        fichier: "Mouton-CalSury27.mp3"
+      },
+
+      chevre: {
+        nom: "la chèvre",
+        icone: "🐐",
+        fichier: "Chevre-CalSury27.mp3"
+      },
+
+      coq: {
+        nom: "le coq",
+        icone: "🐓",
+        fichier: "Coq-CalSury27.mp3"
+      },
+
+      poussins: {
+        nom: "les poussins",
+        icone: "🐥",
+        fichier: "Poussins-CalSury27.mp3"
+      },
+
+      canard: {
+        nom: "le canard",
+        icone: "🦆",
+        fichier: "Canard-CalSury27.mp3"
+      },
+
+      ane: {
+        nom: "l’âne",
+        icone: "🫏",
+        fichier: "Ane-CalSury27.mp3"
+      },
+
+      oie: {
+        nom: "l’oie",
+        icone: "🪿",
+        fichier: "Oie-CalSury27.mp3"
+      },
+
+      dindon: {
+        nom: "le dindon",
+        icone: "🦃",
+        fichier: "Dindon-CalSury27.mp3"
+      },
+
+      chien: {
+        nom: "le chien",
+        icone: "🐕",
+        fichier: "Chien-CalSury27.mp3"
+      }
+    };
+
+    const parametres = new URLSearchParams(window.location.search);
+    const animalDemande = parametres.get("animal") || "vache";
+    const animal = animaux[animalDemande.toLowerCase()];
+
+    const icone = document.getElementById("icone");
+    const titre = document.getElementById("titre");
+    const lecteur = document.getElementById("lecteur");
+    const instruction = document.getElementById("instruction");
+    const erreur = document.getElementById("erreur");
+
+    if (animal) {
+      icone.textContent = animal.icone;
+      titre.textContent = "Écoutez " + animal.nom;
+      lecteur.src = animal.fichier;
+      document.title = "Le cri de " + animal.nom;
+    } else {
+      icone.textContent = "❓";
+      titre.textContent = "Animal introuvable";
+      instruction.style.display = "none";
+      lecteur.style.display = "none";
+      erreur.style.display = "block";
+    }
+  </script>
+</body>
+</html>
